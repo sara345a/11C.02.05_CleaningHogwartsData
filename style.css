@@ -1,0 +1,169 @@
+#actor {
+
+    padding: 10px;
+    background-color: #fffff7;
+    cursor: pointer;
+}
+
+/***************************/
+/*          MENU          * /
+/**************************/
+
+h1 {
+    display: flex;
+    justify-content: center;
+    font-family: 'loraregular';
+    font-weight: bold;
+}
+
+
+.movie {
+    margin: 10px auto;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+
+}
+
+button {
+    background-color: #F5CC84;
+    width: 400px;
+    height: 30px;
+    margin: 2px 1px;
+    border-radius: 5px;
+    border-color: #e7d3b5;
+   
+    font-size: 1em;
+    align-self: center;
+
+}
+
+.menu {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.filter {
+    cursor: pointer;
+
+}
+
+
+
+
+
+body {
+    background-color: blanchedalmond;
+}
+
+#popup {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000db;
+    display: none;
+}
+
+#popup article {
+    width: 80vw;
+    height: 80vh;
+    margin: 4rem auto;
+    background-color: blanchedalmond;
+    padding: 20px;
+}
+
+#popup .luk {
+    position: fixed;
+    top: 5rem;
+    right: 3.5rem;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    padding: .1rem;
+    cursor: pointer;
+}
+
+
+
+
+img {
+    max-width: 60%;
+}
+
+
+
+.container {
+    width: 90vw;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+}
+
+
+
+
+
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.left {
+
+    align-self: center;
+    margin: 1rem auto;
+    flex-basis: 40rem;
+}
+
+
+.right {
+    margin: 2rem auto;
+    align-self: center;
+    flex-basis: 30rem;
+}
+
+/******************************************************************/
+
+
+
+@media only screen and (min-width: 600px) {
+    header {
+        position: relative;
+        width: 100%;
+        background-color: blanchedalmond;
+    }
+
+    button {
+        width: 150px;
+    }
+
+    .kategorinavn {
+        margin: 20px 74px;
+    }
+
+    #popup .luk {
+        top: 5rem;
+        right: 10rem;
+    }
+
+    .menu {
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: row;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
