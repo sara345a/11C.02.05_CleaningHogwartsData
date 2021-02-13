@@ -22,10 +22,10 @@ function start( ) {
 const allStudents = [];
 
 const oneStudent = {
-  firstname: "",
-  middlename: "",
-  lastname: "",
-  nickname: "",
+  firstName: "",
+  middleName: "",
+  lastName: "",
+  nickName: "",
   gender: "",
   house: "",
 };
@@ -39,9 +39,22 @@ function loadJSON() {
         // when loaded, prepare objects
         prepareJsonObjects(jsonData);
       });
-    console.log("loaded");
+    console.log("loadJSON");
+
+    addEventListenersToButtons();
+
+
+
+
+    json.forEach((student) => {
+
+
+      addEventListenersToButtons();
+  });
+
   }
 
+  
 
 
 function prepareJsonObjects(jsonData) {
@@ -51,36 +64,53 @@ function prepareJsonObjects(jsonData) {
         const student = Object.create(oneStudent);
 
 
-        // create new objects with cleaned data - and store that in the allStudents array
-        const firstSpace = jsonObject.fullname.indexOf(" ");
-        const lastSpace = jsonObject.fullname.lastIndexOf(" ");
+        // define firstspace and lastspace
+        const firstSpace = jsonObject.fullname.trim().indexOf(" ");
+        const lastSpace = jsonObject.fullname.trim().lastIndexOf(" ");
         
 
         // create const for each data in prototype
-        const firstname = jsonObject.fullname.trim().substring(0, firstSpace);
-        const middlename = jsonObject.fullname.substring(firstSpace, lastSpace).trim();
-        const lastname = jsonObject.fullname.substring(lastSpace).trim();
-        const nickname = jsonObject.nickname;
-        const gender = jsonObject.gender;
-        const house = jsonObject.house;
-
+        const firstName = jsonObject.fullname.trim().substring(0, firstSpace);
+        const middleName = jsonObject.fullname.substring(firstSpace, lastSpace).trim();
+        const lastName = jsonObject.fullname.trim().substring(lastSpace).trim();
+        const gender = jsonObject.gender.substring(0).trim();
+        const house = jsonObject.house.substring(0).trim();
+        const nickName = jsonObject.nickName;
+      
 
         //console.log to see if it works
-        console.log(firstname, lastname, middlename, nickname, gender, house);
+        console.log(firstName, lastName, middleName, nickName, gender, house);
 
 
-        
-        student.firstname = firstname;
-        student.middlename = middlename
-        student.lastname = lastname;
-        student.nickname = nickname;
-        student.gender = gender;
-        student.house = house;
+        //firstname: make first letter C and rest c
+        student.firstName = firstName.substring(0, 1).toUpperCase() +firstName.substring(1, firstSpace).toLowerCase();
 
-        allStudents.push(student);
 
+        //middlename: make first letter C and rest c
+        student.middleName = middleName.substring(0, 1).toUpperCase() + middleName.substring(1, middleName.length).toLowerCase();
+
+
+        //lastname: make first letter C and rest c
+        student.lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1).toLowerCase(lastName.length);
+
+
+        // ""names == nickname
+      
     
+        
 
+        //gender: make first letter C and rest c
+        student.gender = gender.substring(0, 1).toUpperCase() +
+        gender.substring(1).toLowerCase();
+
+
+        //house: make first letter C and rest c
+        student.house = house.substring(0, 1).toUpperCase() +
+        house.substring(1).toLowerCase();
+
+
+        //push that shit
+        allStudents.push(student);
     })
 
     displayList();
@@ -95,7 +125,7 @@ function displayList() {
         // build a new list
         allStudents.forEach(displayStudent);
     
-        console.log("virker jeg1?");
+        console.log("displayList");
     
 
 }
@@ -103,97 +133,21 @@ function displayList() {
 function displayStudent(student) {
 
         // create clone
-        const clone = document.querySelector("template#animal").content.cloneNode(true);
+        const clone = document.querySelector("template#student").content.cloneNode(true);
 
         // set clone data
-        clone.querySelector("[data-field=firstname]").textContent = student.firstname;
-        clone.querySelector("[data-field=lastname]").textContent = student.lastname;
-        clone.querySelector("[data-field=middlename]").textContent = student.middlename;
-        clone.querySelector("[data-field=nickname]").textContent = student.nickname;
+        clone.querySelector("[data-field=firstName]").textContent = student.firstName;
+        clone.querySelector("[data-field=middleName]").textContent = student.middleName;
+        clone.querySelector("[data-field=lastName]").textContent = student.lastName;
+        clone.querySelector("[data-field=nickName]").textContent = student.nickName;
         clone.querySelector("[data-field=gender]").textContent = student.gender;
         clone.querySelector("[data-field=house]").textContent = student.house;
     
         // append clone to list
         document.querySelector("#list tbody").appendChild( clone );
     
-        console.log("virker jeg2?");
+        console.log("displayStudent");
 
 }
 
 
-
-
-// function vis(menu) {
-
-//     console.log(menu);
-
-//     container.innerHTML = "";
-
-//     menu.feed.entry.forEach(actor => {
-
-//         if (filter == "alle" || filter == actor.gsx$movie.$t) {
-
-
-//             const klon = temp.cloneNode(true).content;
-
-//             klon.querySelector(".name").textContent = actor.gsx$name.$t;
-
-// //            klon.querySelector(".kort").textContent = actor.gsx$kort.$t;
-// //
-// //            klon.querySelector(".pris").textContent = "Pris: " + actor.gsx$pris.$t + ",-";
-// //
-// //            klon.querySelector("img").src = "imgs/small/" + actor.gsx$billede.$t + "-sm.jpg";
-
-//             klon.querySelector("article").addEventListener("click", () => visPopup(actor));
-
-//             container.appendChild(klon);
-//         }
-//     })
-// }
-
-
-
-// function addEventListenersToButtons() {
-
-//     document.querySelectorAll(".filter").forEach((btn) => {
-
-//         btn.addEventListener("click", filterBTNs);
-
-//     });
-
-// }
-
-
-
-// function filterBTNs() {
-
-//     filter = this.dataset.movie;
-
-//     document.querySelector(".movie").textContent = this.textContent;
-
-//     document.querySelectorAll(".filter").forEach((btn) => {
-
-//         btn.classList.remove("valgt")
-
-//     })
-
-//     this.classList.add("valgt")
-
-//     vis(json);
-
-// }
-
-
-// loadJson();
-
-
-// function visPopup(actor) {
-//     popup.style.display = "block";
-//     popup.querySelector("h2").textContent = actor.gsx$name.$t;
-//     popup.querySelector(".beskrivelse").textContent = "Beskrivelse: " + actor.gsx$lang.$t;
-//     popup.querySelector(".oprindelse").textContent = "Oprindelse: " + actor.gsx$oprindelse.$t;
-//     popup.querySelector(".pris").textContent = "Pris: " + actor.gsx$pris.$t + ",-";
-//     popup.querySelector("img").src = "imgs/small/" + actor.gsx$billede.$t + "-sm.jpg";
-
-//     document.querySelector(".luk").addEventListener("click", () => popup.style.display = "none");
-// }
